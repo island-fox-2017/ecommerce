@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <tr>
+          <td>No</td>
+          <td>Member Id</td>
+          <td>Book List</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% var i = 1%>
+        <%data.forEach(dat =>{%>
+          <tr>
+            <td><%= i %></td>
+            <td><%= dat.memberid %></td>
+            <td>
+              <ol><% dat.booklist.forEach(list=>{%>
+              <li><%=list.title%></li>
+            <%})%></ol>
+          </td>
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </body>
+</html>
