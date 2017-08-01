@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper brown darken-4">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!--
+    <div class="">
+      <img src="/assets/img/bookstore.jpg" alt="" style="top: -100px; clip-path: inset(300px 0px); width: 100%" border="1px solid black">
+    </div>
+    -->
+
+    <div class="section section1 brown darken-4" style="background-image: url("/assets/img/bookstore.jpg"); height: 150px">
+      <h5>Section 1</h5>
+      <p>Sekedar Gambar</p>
+    </div>
+
+    <div class="section" style="background-image: url("/assets/img/bookstore.jpg"); background-color: #212121; color: #fff; height: 150px">
+
+    </div>
+
+    <div class="row shopMain">
+      <div class="col l3">
+
+        <nav class="searchBar brown darken-4">
+          <div class="nav-wrapper">
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </nav>
+
+        <div class="container shopSideBar">
+
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+              <div class="collapsible-body">
+              <span>
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                  </li>
+                </ul>
+              </span>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="col l9">
+        <div style="margin-bottom: 10px">
+          <div class="chip">
+            Fantasy
+            <i class="close material-icons">close</i>
+          </div>
+          <div class="chip">
+            Fiction
+            <i class="close material-icons">close</i>
+          </div>
+          <div class="chip">
+            Child
+            <i class="close material-icons">close</i>
+          </div>
+        </div>
+
+        <nav class="brown darken-3" style="border-radius: 20px">
+          <div class="nav-wrapper">
+            <div class="col l12">
+              <a href="#!" class="breadcrumb">First</a>
+              <a href="#!" class="breadcrumb">Second</a>
+              <a href="#!" class="breadcrumb">Third</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="row">
+          <div id="app">
+
+            <div class="col l4" v-for="book in bookInfo">
+              <div class="card item">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator bookImg" v-bind:src="book.image">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">{{ book.title }}<i class="material-icons right">more_vert</i></span>
+                  <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">{{ book.title }}<i class="material-icons right">close</i></span>
+                  <p>Author: {{ book.author }} Category: {{ book.category }} Stock: {{ book.stock }}</p>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- VUE app -->
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/assets/materialize/js/materialize.min.js"></script>
+    <script src="/assets/js/index.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".button-collapse").sideNav();
+        $('.collapsible').collapsible();
+        $('.carousel').carousel();
+      })
+    </script>
+  </body>
+</html>

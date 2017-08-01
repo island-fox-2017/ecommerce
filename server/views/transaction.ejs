@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>hay</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Member ID</th>
+        <th>Book List</th>
+      </tr>
+      <% datas.forEach( data => { %>
+        <tr>
+          <td><%= data.memberid %></td>
+          <td>
+          <ol>
+            <% data.booklist.forEach( book => { %>
+            <li><%= book.title %></li>
+            <% }) %>
+          </ol>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>

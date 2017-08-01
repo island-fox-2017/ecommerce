@@ -1,0 +1,39 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.item {
+  border: 1px solid black;
+  width: 250px;
+}
+
+.bookImg {
+  height: 300px;
+}
+
+.shopMain {
+}
+
+.shopSideBar {
+  margin-left: 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  width: 290px;
+  border-radius: 35px
+}
+
+.searchBar {
+  background-color: #212121;
+  margin-top: 5px;
+  height: 70px;
+  border-radius: 35px
+}
+
+.shopBar {
+  display: flex;
+}
+
+.section1 {
+  color: white;
+  height: 250px;
+}
