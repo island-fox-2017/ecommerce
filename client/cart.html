@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/shop-homepage.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>BORMA | Serba ada</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-toggleable-md bg-yellow">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="./img/logo2.png" alt="borma logo" width="100"></a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav col-md-3" id="search">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Makanan</a>
+                      <a class="dropdown-item" href="#">Peralatan Kantor</a>
+                      <a class="dropdown-item" href="#">Fresh Food</a>
+                    </div>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search" style="width: 300px">
+                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                  <li class="pr-3">
+                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="#"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="app">
+      <div class="container">
+        <div class="row">
+          <div class="card cart-table">
+            <div class="card-box">
+              {{ message }}
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-md-6">
+                      <div class="media">
+                        <a href="#" class="thumbnail"><img src="./img/item-2.jpg" alt="beli-spinner-bandung" style="width: 72px; height: 72px"></a>
+                        <div class="media-body pl-md-3">
+                          <h4 class="media-heading"><a href="#">{{ trans.item_list[0].title }}</a></h4>
+                          <h5 class="media-heading">by <a href="#">{{ trans.item_list[0].seller }}</a></h5>                          
+                        </div>
+                      </div>
+                    </td>
+                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                      <input class="form-control" type="number" name="" value="3">
+                    </td>
+                    <td class="col-sm-1 col-md-1 text-center"><strong>Rp.15.000</strong></td>
+                    <td class="col-sm-1 col-md-1 text-center"><strong>Rp.25.000</strong></td>
+                    <td class="col-sm-1 col-md-1">
+                      <button type="button" class="btn btn-danger float-right" name="button">
+                        <span class="glypicon glyphicon-remove">X</span>
+                      </button>
+                    </td>
+
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; </td>
+                    <td><h5>SubTotal<br>Estimated shipping</h5><br><h3>Total</h3></td>
+                    <td class="text-right"><h5><strong>Rp50.000</strong><br>Rp30.000</h5><br><h3>Rp80.000</h3></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                      <button class="btn btn-primary" type="button" name="button">
+                        <span class=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          Continue Shopping</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-success" type="button" name="button">Checkout
+                          <span class=""><i class="" aria-hidden="true"></i></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <footer class="py-5 bg-inverse footer">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; BORMA 2017</p>
+        </div>
+    </footer>
+    <!-- footer -->
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/tether/tether.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/style.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="js/cart_vue.js"></script>
+
+  </body>
+</html>
