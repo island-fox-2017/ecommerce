@@ -223,7 +223,7 @@
                   <th>Total Price</th>
                   <th></th>
                   <th></th>
-                  <th>800$</th>
+                  <th>{{total}}</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -285,7 +285,8 @@
       el: '#app',
       data: {
         msg: 'hai',
-        list_data: ''
+        list_data: '',
+        total: 0
       },
       created: function(){
         var self = this
@@ -293,6 +294,10 @@
         .then(rows=>{
           console.log(rows.data);
           self.list_data = rows.data
+
+          self.list_data.booklist.forEach(dat =>{
+            self.total = self.total + dat.price
+          })
         })
         .catch(err=>{
           console.log(err);
