@@ -7,13 +7,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/assets/materialize/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
+  <div id="app">
     <nav>
-      <div class="nav-wrapper brown darken-4">
+      <div class="nav-wrapper grey darken-4">
         <a href="#" class="brand-logo">Logo</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="sass.html">Sass</a></li>
@@ -23,9 +24,43 @@
       </div>
     </nav>
 
-    <div id="app">
-      {{ transaction_list }}
-    </div>
+      <!-- {{ transaction_list[1].booklist }} -->
+      <div class="container">
+
+        <div v-show="isLoading" class="preloader-wrapper big active centerPos">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="overflow-y:scroll; height: 400px;">
+          <table v-show="!isLoading">
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>ISBN</th>
+            </tr>
+            <tr v-for="item in transaction_list[1].booklist">
+              <td><img v-bind:src="item.image" alt="" class="square" style="height: 100px"></td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.author }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.isbn }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

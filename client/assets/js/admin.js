@@ -1,16 +1,6 @@
 
 let $adminForm = ('#adminForm');
 
-// $adminForm.submit(function() {
-//   axios.post('http://localhost:4500/book/', {
-//     isbn: req.body.isbn,
-//     title: req.body.title,
-//     author: req.body.author,
-//     category: req.body.category,
-//     stock: req.body.stock,
-//     image: "http://localhost:8080/assets/img/" + req.body.image
-//   })
-// });
 
 var app = new Vue({
   el: '#app',

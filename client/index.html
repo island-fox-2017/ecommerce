@@ -13,35 +13,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper brown darken-4">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
-      </div>
-    </nav>
+  <div id="app">
+
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper grey darken-4">
+          <a href="#" class="brand-logo">Logo</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Cart <i class="material-icons right">shopping_cart</i><span class="new badge">{{ transaction_info.booklist.length }}</span></a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <!--
     <div class="">
       <img src="/assets/img/bookstore.jpg" alt="" style="top: -100px; clip-path: inset(300px 0px); width: 100%" border="1px solid black">
     </div>
     -->
 
-    <div class="section section1 brown darken-4" style="background-image: url("/assets/img/bookstore.jpg"); height: 150px">
-      <h5>Section 1</h5>
-      <p>Sekedar Gambar</p>
+    <div class="section section1 grey darken-4" style="background-image: url('/assets/img/library1.jpg'); height: 200px">
     </div>
-
-    <div class="section" style="background-image: url("/assets/img/bookstore.jpg"); background-color: #212121; color: #fff; height: 150px">
-
-    </div>
+    <!-- <div class="parallax-container" style="height: 200px">
+      <div class="parallax"><img src="/assets/img/library1.jpg"></div>
+    </div> -->
 
     <div class="row shopMain">
       <div class="col l3">
 
-        <nav class="searchBar brown darken-4">
+        <nav class="searchBar grey darken-4">
           <div class="nav-wrapper">
             <form>
               <div class="input-field">
@@ -105,7 +106,7 @@
           </div>
         </div>
 
-        <nav class="brown darken-3" style="border-radius: 20px">
+        <nav class="grey darken-3" style="border-radius: 20px">
           <div class="nav-wrapper">
             <div class="col l12">
               <a href="#!" class="breadcrumb">First</a>
@@ -116,28 +117,31 @@
         </nav>
 
         <div class="row">
-          <div id="app">
 
-            <div class="col l4" v-for="book in bookInfo">
-              <div class="card item">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator bookImg" v-bind:src="book.image">
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">{{ book.title }}<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">{{ book.title }}<i class="material-icons right">close</i></span>
-                  <p>Author: {{ book.author }} Category: {{ book.category }} Stock: {{ book.stock }}</p>
-                </div>
+          <div class="col l4" v-for="book in book_info">
+            <div class="card item">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator bookImg" v-bind:src="book.image">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{ book.title }}<i class="material-icons right">more_vert</i></span>
+                <p>
+                  <a v-on:click="addCart(book._id)" class="waves-effect waves-light btn">Add to Cart
+                    <i class="material-icons right">add_shopping_cart</i>
+                  </a>
+                </p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{ book.title }}<i class="material-icons right">close</i></span>
+                <p>Author: {{ book.author }} Category: {{ book.category }} Stock: {{ book.stock }}</p>
               </div>
             </div>
+          </div>
 
-          </div> <!-- VUE app -->
         </div>
       </div>
     </div>
+  </div> <!-- VUE app -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -149,6 +153,7 @@
         $(".button-collapse").sideNav();
         $('.collapsible').collapsible();
         $('.carousel').carousel();
+        $('.parallax').parallax();
       })
     </script>
   </body>
