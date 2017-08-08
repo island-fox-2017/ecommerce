@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Suplement</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    
+</head><!--/head-->
+
+<body>
+  <div id="home">
+    
+	<header id="header">
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						SUPLEMENT LOGO
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li>
+                  <!-- <a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a> -->
+                  <button type="button" class="btn btn-default add-to-cart" data-toggle="modal" data-target="#cart"><i class="fa fa-shopping-cart"></i>Cart</button>
+                  <!-- Modal -->
+                  <div id="cart" class="modal fade" role="dialog">
+                    <div class="modal-dialog" style="width:1000px">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Shoping Cart</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Your Item</p>
+                          <table class="table table-bordered">
+                            <tr>
+                              <th>Name</th>
+                              <th>Category</th>
+                              <th>Price</th>
+                              <th>QTY</th>
+                              <th>Total</th>
+                              <th>Action</th>
+                            </tr>
+                            <tr v-for="(item, index) in cartItem">
+                              <td>{{item.name}}</td>
+                              <td>{{item.category}}</td>
+                              <td>{{item.price}}</td>
+                              <td><input v-model="qty" type="number" name="" value=""></td>
+                              <td>{{item.price * qty}}</td>
+                              <td>
+                                <button @click="removeItem(item,index)" type="button"class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><button @click="calculateTotal()" class="btn btn-success" type="button">Total</button></td>
+                              <td>{{total}}</td>
+                            </tr>
+                          </table>
+                          <button type="button" class="btn btn-info" name="button">Checkout</button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="index.html" class="active">Home</a></li>
+								<li class="dropdown">
+                  <a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                    <ul role="menu" class="sub-menu">
+    										<li><a href="">Category</a></li>  
+                    </ul>
+                </li> 					
+								<li><a href="contact-us.html">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input v-model="search" type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+									<img src="http://suplemenonline.net/wp-content/uploads/2013/11/Carnivor-Mass-2.jpg"/>
+							</div>
+              <div class="item">
+									<img src="https://images-na.ssl-images-amazon.com/images/G/02/aplusautomation/vendorimages/144a3df1-193f-4d23-a70d-7f56bee2aebd.jpg._CB333842175__SR970,300_.jpg"/>
+							</div>
+              <div class="item">
+									<img src="https://supplementwarehouse.com.au/media/attributesplash/ultimate-nutrition_1.jpg"/>
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Whey Protein
+										</a>
+									</h4>
+								</div>
+								<div id="sportswear" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li v-for="category in suplements" v-if="category.category === 'Whey Protein'"><a href="#">{{category.name}}</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Gainer
+										</a>
+									</h4>
+								</div>
+								<div id="mens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li v-for="category in suplements" v-if="category.category === 'Gainer'"><a href="#">{{category.name}}</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Creatine
+										</a>
+									</h4>
+								</div>
+								<div id="womens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li v-for="category in suplements" v-if="category.category === 'Creatine'"><a href="#">{{category.name}}</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+						</div><!--/category-products-->
+					
+						<div class="brands_products"><!--brands_products-->
+							<h2>Brands</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+									<li><a href="#">xxx</a></li>
+									<li><a href="#">xxx</a></li>
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Features Items</h2>
+						<div v-for="suplement in suplements" class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+											<img v-bind:src="suplement.image" alt="" />
+											<h2>Rp. {{suplement.price}}</h2>
+											<p>{{suplement.name}}</p>
+											<h4>Stock: {{suplement.stock}}</h4>
+                      <button @click="addToCart(suplement)" type="submit" name="button" class="btn btn-default add-to-cart" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button v-on:click="getId(suplement._id)" type="button" class="btn btn-default add-to-cart" data-toggle="modal" data-target="#myModal"><i class="fa fa-shopping-cart"></i>Detail</button>
+
+                      <!-- Modal -->
+                      <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">{{detail.name}}</h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>{{detail.description}}</p>
+                              <h5>Price: Rp. {{detail.price}}</h5>
+                              <img v-bind:src="detail.image" alt="" />
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                      
+										</div>
+								</div>
+							</div>
+						</div>
+					</div><!--features_items-->
+					
+				</div>
+			</div>
+		</div>
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Order Status</a></li>
+								<li><a href="#">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div> 
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © Ade_Anugerah.</p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+</div>
+  
+  <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+  <script src="js/jquery.prettyPhoto.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
