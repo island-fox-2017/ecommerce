@@ -1,0 +1,54 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+html {
+   position: relative;
+   min-height: 100%;
+}
+
+body {
+    padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+nav {
+  background-color: #ffcc01;
+}
+
+.star {
+  color: #ffd741;
+}
+
+/*.btn-primary:hover {
+    background-color: #0a4039;
+}*/
+
+.cart-table {
+  margin-top: 50px;
+}
+
+.buy-now-btn {
+  background-color: #e92b1a;
+  color: white;
+  font-weight: 900;
+  border-radius: 3px;
+  display: block;
+}
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
