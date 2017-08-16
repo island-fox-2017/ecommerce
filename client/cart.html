@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Antique Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+  </head>
+  <body>
+    <nav class="navbar level">
+      <!-- Logo in navbar -->
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html">
+          <img class="logo-navbar" src="resources/images/logo-white.png" alt="Antique Book logo">
+        </a>
+
+        <!-- Ini apaan ya? -->
+        <!-- Ohh, ternyata harus gak dihidden -->
+        <a class="navbar-item" href="https://twitter.com/jgthms" target="_blank">
+          <span class="icon" style="color: #55acee;">
+            <i class="fa fa-twitter"></i>
+          </span>
+        </a>
+
+        <!-- Navbar menu dan dropdown -->
+        <!-- Lanjutin ntar -->
+      </div>
+
+
+        <div id="search-box" class="field is-grouped level-right">
+
+          <p class="control is-expanded">
+            <input id="search-input" class="input" type="text" placeholder="Search">
+          </p>
+        </div>
+    </nav>
+
+    <div class="columns">
+
+      <div class="column is-8 is-offset-2">
+
+        <p id="cart-title" class="title is-2">Your shopping cart</p>
+
+        <table id="cart-items" class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- First row -->
+            <tr>
+              <td>
+                <figure class="image is-96x96">
+                  <img src="resources/images/book02.jpg">
+                </figure>
+              </td>
+              <td class>
+                  Lot of 14 Antique/VTG Decorative <br>Leather Victorian Books Home Decor Distressed
+              </td>
+              <td>
+                Quantity:
+              </td>
+              <td>
+                1 pcs
+              </td>
+              <td>Price:</td>
+              <td>$95.99</td>
+              <td><a class="delete is-medium"></a></td>
+            </tr>
+
+            <!-- Second row -->
+            <tr>
+              <td>
+                <figure class="image is-96x96">
+                  <img src="resources/images/book01.jpg">
+                </figure>
+              </td>
+              <td class>
+                  5 Antique Leather French Italian <br> German Spanish Dictionary Book Set
+              </td>
+              <td>
+                Quantity:
+              </td>
+              <td>
+                1 pcs
+              </td>
+              <td>Price:</td>
+              <td>$97.99</td>
+              <td><a class="delete is-medium"></a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a class="button is-medium">Proceed to Checkout</a>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Antique Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+
+    <!-- ======= NAVBAR ======= -->
+    <nav class="navbar level">
+      <!-- Logo in navbar -->
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img class="logo-navbar" src="resources/images/logo-white.png" alt="Antique Book logo">
+        </a>
+
+        <!-- Ini apaan ya? -->
+        <!-- Ohh, ternyata harus gak dihidden -->
+        <a class="navbar-item" href="https://twitter.com/jgthms" target="_blank">
+          <span class="icon" style="color: #55acee;">
+            <i class="fa fa-twitter"></i>
+          </span>
+        </a>
+
+        <!-- Navbar menu dan dropdown -->
+        <!-- Lanjutin ntar -->
+      </div>
+
+        <div id="search-box" class="field is-grouped level-right">
+
+          <a class="navbar-item" href="cart.html">
+            Shopping Cart
+          </a>
+
+          <p class="control is-expanded">
+            <input id="search-input" class="input" type="text" placeholder="Search">
+          </p>
+        </div>
+    </nav>
+    <!-- ======= NAVBAR ======= -->
+
+    <!-- Column -->
+    <div id="main-col" class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            <strong>CATEGORIES</strong>
+          </p>
+          <ul class="menu-list">
+            <li><a>Vintage Leather Books</a></li>
+            <li><a>Antique Poetry Books</a></li>
+            <li><a>Old Leather Books</a></li>
+            <li><a>Old Books</a></li>
+            <li><a>Antique Book Lot</a></li>
+            <li><a>Maxfield Parrish</a></li>
+            <li><a>Antique Book Set</a></li>
+            <li><a>Antique Leather Tablet</a></li>
+          </ul>
+          <p class="menu-label">
+            <strong>ANTIQUES BOOKS</strong>
+          </p>
+          <ul class="menu-list">
+            <li><a>By Demands</a></li>
+            <li>
+              <a>Antique Book Lists</a>
+              <ul>
+                <li><a>Childrens Books</a></li>
+                <li><a>History Books</a></li>
+                <li><a>Magic Books</a></li>
+                <li><a>Poetry Books</a></li>
+                <li><a>Religious Books</a></li>
+                <li><a>Science Books</a></li>
+                <li><a>Shakespeare Books</a></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="menu-label">
+            <strong>ALSO SHOP IN</strong>
+          </p>
+          <ul class="menu-list">
+            <li><a>Books</a></li>
+            <li><a>Antiquarian</a></li>
+            <li><a>Collectible</a></li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Right side -->
+      <div id="righ-col" class="column">
+
+        <!-- Slideshow -->
+        <div class="columns">
+          <div class="column">
+            <div class="slideshow-container">
+
+              <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="resources/images/main-img.png" style="width:100%">
+                <div class="text">Caption Text</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="resources/images/main-img.png" style="width:100%">
+                <div class="text">Caption Two</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="resources/images/main-img.png" style="width:100%">
+                <div class="text">Caption Three</div>
+              </div>
+
+              </div>
+              <br>
+
+              <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+          </div>
+        </div>
+        <!-- slidshow -->
+
+        <!-- Top books -->
+        <div class="columns">
+          <p class="title is-2">Top books this week</p>
+        </div>
+
+        <div id="app" class="columns">
+          <div class="column is-4" v-for="book in books">
+            <div class="card">
+              <a v-on:click="itemDetail(book._id)">
+                <div class="card-image">
+                  <figure class="image is-square">
+                    <img v-bind:src="book.img" alt="book image 1">
+                  </figure>
+                </div>
+              </a>
+              <div class="card-content">
+
+                <div class="content">
+                  <a href="#" class="title is-5">{{book.title}}</a>
+                  <br>
+                  <p class="subtitle is-6">{{book.about}}</p>
+
+                <br>
+                  <a v-on:click="addBooklist(book._id)" class="button">Add to Cart</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Most popular by users -->
+    <div class="columns">
+      <p class="title is-2">Most popular by users</p>
+    </div>
+
+    <!-- Column bawah -->
+    <div class="columns is-gapless">
+      <div class="column">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="resources/images/book01.jpg" alt="Image">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Image">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Image">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Image">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <a href="index.html">Antique Books</a> by <a href="https://github.com/adithwip">Adith Widya Pradipta</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+          </p>
+          <p>
+            <a class="icon" href="https://github.com/adithwip">
+              <i class="fa fa-github"></i>
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript">
+  var slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex> slides.length) {slideIndex = 1}
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 8000); // Change image every 8 seconds
+  }
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      books: []
+    },
+    methods: {
+      getBookData: function() {
+        var self = this
+        axios.get('http://localhost:3000/api/books')
+        .then(books => {
+          self.books = books.data
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      },
+      itemDetail: function(id) {
+        window.location = `http://127.0.0.1:8080/item_detail.html?id=${id}`
+      },
+      addBooklist: function(id) {
+        axios.post('http://localhost:3000/api/transactions/59813466d2201e2fc378fa80', {
+          bookid: id
+        })
+        .then(data => {
+          console.log("insert booklist success!");
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
+    },
+    created: function() {
+      this.getBookData()
+    }
+  })
+
+
+  </script>
+</html>
