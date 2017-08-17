@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ecommerce-layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body >
+<div id='app'>
+  <section class="hero gray-box is-small">
+  <!-- Hero header: will stick at the top -->
+  <div class="hero-head">
+    <header class="nav">
+      <div class="container">
+        <div class="nav-left">
+          <a class="nav-item">
+            <img src="" alt="Logo">
+          </a>
+        </div>
+        <span class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div class="nav-right nav-menu">
+            <div class="modal" id="modal-content1">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <!-- Any other Bulma elements you want -->
+                <div class="box-blue column is-half is-offset-one-quarter">
+                  <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                      <input class="input" type="email" placeholder="Email">
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                      <span class="icon is-small is-right">
+                        <i class="fa fa-check"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control has-icons-left">
+                      <input class="input" type="password" placeholder="Password">
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <button class="button is-success ">
+                        Login
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large toggleModal modal1"></button>
+            </div>
+            <a class="nav-item toggleModal modal1 has-text-white-ter">Signin</a>
+
+          <!-- MODAL 2 -->
+          <div class="modal" id="modal-content2">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <!-- Any other Bulma elements you want -->
+              <div class="box-blue column is-half is-offset-one-quarter">
+                <div class="field">
+                  <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Email">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fa fa-check"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input class="input" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <button class="button is-success">
+                      Register
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button class="modal-close is-large toggleModal modal2"></button>
+          </div>
+          <a class="nav-item toggleModal modal2 has-text-white-ter">Signup</a>
+
+          <!-- end modal 2 -->
+          <span class="nav-item">
+            <a class="button is-inverted">
+              <button @click="showCart = !showCart" v-show="!verified">
+                {{ items.length + (items.length > 1 || items.length === 0 ? " items" : " item") }}
+              </button>
+            </a>
+          </span>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title has-text-white-ter">
+        Title
+      </h1>
+      <h2 class="subtitle has-text-white-ter">
+        Subtitle
+      </h2>
+    </div>
+
+    <div class="modal" v-bind:class="{ 'is-active': showCart }">
+      <div class="modal-background">
+
+      </div>
+          <div class="modal-content white">
+            <div class="column">
+              <div class="cart" v-show="showCart">
+                <div v-show="items.length > 0">
+                  <ul>
+                    <li v-for="item in items" transition="fade">
+                      <p><strong>1</strong> - {{ item.title }} <i class="fa fa-trash" @click="removeFromCart(item)"></i></p>
+                    </li>
+                  </ul>
+                  <div><button @click="verified = true, showCart = false">Check out</button></div>
+                </div>
+                <div v-show="items.length === 0">
+                  <p>Your cart is empty!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button @click="showCart = !showCart" v-show="!verified" class="modal-close is-large"></button>
+        </div>
+
+
+        <div class="modal" v-bind:class="{ 'is-active': verified }">
+          <div class="modal-background">
+          </div>
+              <div class="modal-content white">
+                <div class="column">
+                  <div class="checkout" v-show="verified">
+                    <h3>Your Cart</h3>
+                    <h5 v-for="item in items"><strong>{{ item.title }}</strong> - {{ item.author }}<span>${{ item.price }}</span></h5>
+                    <hr />
+                    <div class="row">
+                      <div class="u-pull-right">
+                        <h5>Total: {{total}}<span></span></h5>
+                        <button>Looks Good</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+              <button @click="verified = !verified" v-show="verified" class="modal-close is-large"></button>
+          </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+</section>
+
+<br>
+<section>
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column is-3">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" placeholder="Keyword Search">
+          </div>
+          <div class="control">
+            <a class="button is-info">
+              GO
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="dropdown drp">
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span>Dropdown button</span>
+              <span class="icon is-small">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <a href="#" class="dropdown-item">
+                Dropdown item
+              </a>
+              <a class="dropdown-item">
+                Other dropdown item
+              </a>
+              <a href="#" class="dropdown-item">
+                Active dropdown item
+              </a>
+              <a href="#" class="dropdown-item">
+                Other dropdown item
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COROUSEL  -->
+<!-- <section class="section container is-fluid hero">
+  <div id="slider">
+    <figure>
+      <img src="http://bulma.io/images/placeholders/640x480.png" alt>
+      <img src="http://bulma.io/images/placeholders/640x480.png" alt>
+      <img src="http://bulma.io/images/placeholders/640x480.png" alt>
+      <img src="http://bulma.io/images/placeholders/640x480.png" alt>
+    </figure>
+  </div>
+</section> -->
+<!-- END COROUSEL -->
+
+<!-- Main content -->
+<section>
+  <div class="container is-fluid">
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <article class="tile is-child">
+            <div class="columns">
+              <div class="column" >
+                <div class="card">
+                  <div class="card-content">
+                    <aside class="menu">
+                      <!-- collapse -->
+                      <input id="toggle" type="checkbox">
+                      <label for="toggle" class="menu-label">
+                      </label>
+                        Category
+                      <div id="expand">
+                        <section>
+                          <ul class="menu-list">
+                            <li><a class="has-text-black">Shoes</a></li>
+                            <li><a class="has-text-black">Men Shoes</a></li>
+                          </ul>
+                        </section>
+                      </div>
+                      <!-- end collapse -->
+                      <hr>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="tile is-parent is-9">
+          <article class="tile is-child">
+            <div class="columns item-custom">
+              <div class="column is-4" v-for="data in list_item">
+                <div class="card">
+                  <div class="card-content">
+                    <div class="media-content">
+                      <p class="title is-4">{{ data.title }}</p>
+                      <p class="subtitle is-6">@{{data.author}}</p>
+                    </div>
+                  </div>
+                  <div class="card-image">
+                    <figure class="image is-3by4">
+                      <img v-bind:src="data.img" alt="Image">
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <div class="content">
+                      <p>{{data.category}}</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                      <a>#css</a> <a>#responsive</a>
+                      <br>
+                      <small>Isbn: {{data.isbn}}</small>
+                      <small v-if="data.stock > 0">Stock: {{data.stock}}</small>
+                      <small v-else>Sold Out!</small>
+                      <button type="button" name="button" @click="addToCart(data)">Add To Chart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+    </div>
+  </div>
+<!-- END MAIN CONTENT -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>E-commerce-layout</strong> by <a href="">Sukmo Ronggo</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/sukmahd">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- END FOOTER -->
+</section>
+</div>
+  </body>
+
+  <!-- vue js setting -->
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data:{
+        message: 'hello vue',
+        list_item: [],
+        items: [],
+        showCart: false,
+        verified: false,
+        status: false
+      },
+      computed: {
+        total() {
+          var total = 0;
+          for(var i = 0; i < this.items.length; i++) {
+            total += this.items[i].price;
+          }
+          return total;
+        }
+      },
+      methods:{
+        addToChart: function(id){
+          axios.post('http://localhost:3000/transaction/597713c75802f469157cddf6',{
+            book_id: id
+          })
+          .then(log=>{
+            console.log(log);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
+        },
+        addToCart(item) {
+          item.quantity += 1;
+          this.items.push(item);
+        },
+        removeFromCart(item) {
+          item.quantity -= 1;
+          this.items.splice(this.items.indexOf(item), 1);
+        }
+      },
+      created: function(){
+        console.log('asd');
+        var self = this
+        axios.get('http://35.187.230.100:3000/book')
+        .then(function(rows){
+          for (var i = 0; i < rows.data.length; i++) {
+            self.list_item.push(rows.data[i])
+          }
+        })
+        .catch(err =>{
+          console.log(err);
+        })
+      }
+    })
+  </script>
+
+  <!-- animation js -->
+  <script type="text/javascript">
+    $('.drp').click(function(){
+      $(this).toggleClass('is-active')
+    })
+
+    $('.toggleModal.modal1').click(function(){
+      $('#modal-content1').toggleClass('is-active')
+    })
+
+    $('.toggleModal.modal2').click(function(){
+      $('#modal-content2').toggleClass('is-active')
+    })
+
+    // $('.column.is-4').hover(function(){
+    //   var width =  $(this).width
+    //   console.log(width);
+    //   $(this).css('width', width * 1.5)
+    // })
+    //
+    $( ".card" ).hover(function(){
+      $( this ).toggleClass( 'shadow-drop-2-center');
+    })
+  </script>
+</html>
