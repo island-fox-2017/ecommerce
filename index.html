@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> ecommerce </title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  height: 100%;
+  background: linear-gradient(to top, #FF6B83, lighten(#FF6B83, 15%)) no-repeat fixed;
+}
+
+#app {
+  font-family: 'Roboto Slab', serif;
+}
+
+.header  {
+  height: 80px;
+  h2 {
+    color: #fff;
+    font-family: 'Rock Salt';
+    float: left;
+    font-weight: bolder;
+    margin: 10px 20px;
+  }
+  button {
+    border: 0;
+    background: #FFDBE0;
+    transition: all .1s ease-out;
+    &:hover {
+      background: darken(#FFDBE0, 2%);
+    }
+  }
+  div {
+    float: right;
+    display: inline;
+    margin: 10px;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.fa {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.fade-transition {
+  transition: all 0.2s ease-out;
+}
+
+.fade-enter, .fade-leave {
+  opacity: 0;
+}
+
+.cart {
+  > div {
+    z-index: 100;
+    background: #fff;
+    padding: 20px 30px;
+    position: absolute;
+    right: 30px;
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.3);
+    div {
+      text-align: center;
+    }
+  }
+  ul, li, p {
+    margin-bottom: 0;
+  }
+  button {
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+}
+
+.shop {
+  h3 {
+    position: absolute;
+    top: -85px;
+    left: -30px;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: sans-serif;
+    font-size: 4em;
+    font-weight: bold;
+    letter-spacing: -2px;
+  }
+  ul {
+    margin-top: 90px;
+  }
+  li div {
+    padding: 30px;
+    background: #fff;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+  button {
+    color: white;
+    border: 0;
+    background: #00ADB5;
+    margin: 0;
+    transition: all .1s ease-out;
+    &:hover {
+      background: darken(#00ADB5, 5%)
+    }
+  }
+}
+
+.checkout {
+  background: #fff;
+  box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.3);
+  margin-top: 90px;
+  padding: 50px 60px;
+  h3 {
+    position: absolute;
+    top: -85px;
+    left: -30px;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: sans-serif;
+    font-size: 4em;
+    font-weight: bold;
+    letter-spacing: -2px;
+  }
+  span {
+    float: right;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .checkout {
+    padding: 30px 40px;
+    h5 {
+      font-size: 1.2em;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .shop h3, .checkout h3 {
+    font-size: 3.3em;
+    top: -70px;
+    left: 0px;
+  }
+}
+
+/*till here*/
+
+
+  body {
+    border: solid 2px red
+  }
+  footer {
+    margin: 30px;
+    padding: 5px;
+    background-color: black;
+  }
+  .welcome {
+    margin: 30px;
+    padding: 1px;
+    background-color: #fff;
+  }
+  .row {
+    border: solid 2px black;
+    margin: 30px;
+    padding: 5px;
+  }
+  .kanan {
+    border: solid 2px black;
+  }
+  .tengah {
+    border: solid 2px black;
+  }
+  .kiri {
+    border: solid 2px black;
+  }
+</style>
+  </head>
+  <body>
+
+    <div class="col-md-11 welcome text-center" style="z-index:999;">
+      <h2>WELCOME TO JEDI BOOK STORE </h2>
+    </div>
+
+    <div class="container-fluid">
+      <nav class="navbar navbar-inverse">
+        <ul class="nav navbar-nav">
+          <li><a href="#">list of categories</a></li>
+          <li><a href="#">list all books</a><li>
+          <li><a href="#">best book</a></li>
+          <li><a href="#">most popular</a><li>
+        </ul>
+      </nav>
+        <div class="container">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="img/bannerA.jpg" alt="Los Angeles" style="width:100%;">
+              </div>
+              <div class="item">
+                <img src="img/bannerB.jpg" alt="Chicago" style="width:100%;">
+              </div>
+              <div class="item">
+                <img src="img/bannerC.jpg" alt="New york" style="width:100%;">
+              </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+
+<!-- disini kudune impelementasi si vuejs awal yg html -->
+          <!-- disini buat tempat munculin produk n deskripsi + buy button -->
+<!-- <div id="app">
+  {{ message }}
+</div>
+ <div class="apps">
+   {{ title }}
+ </div> -->
+
+<!-- jadi ntar disini tempat kt kaya ejs dulu pake forEach disini..  -->
+<!-- ga perlu img e
+yg kt perlu paling data => yg ada di db si book kt tampilin -->
+<!-- setelah itu coba kt manipulasi sampe paham..  -->
+<!-- <div id="app">
+  <ol>
+    <li v-for="book in books">
+      {{ book.title }}
+      {{ book.author }}
+      {{ book.description }}
+      {{ book.price }}
+    </li>
+  </ol>
+</div> -->
+
+
+
+<!-- klo sudah ngerti baru lanjut ada referensi atau gabung dgn data lain -->
+
+      <!-- <div id="app">
+        <div class="row">
+          <div class="panel panel-info col-md-4" v-for="book in books">
+            <div class="panel-heading"> {{ book.title }} {{ book.author }} </div>
+            <div class="panel-body">{{ book.description }}</div>
+            <div class="panel-footer">{{ book.price }} BUY NOW <a href="http://localhost:8080/bayar">buy here</a></div>
+          </div>
+        </div>
+      </div> -->
+        <!-- disini kudu di simpen id buku tersebut ke cookies / local storage dulu
+setelah itu baru deh di halaman selanjutnya dipanggil local storage itu
+dan bisa utk nampilin buku yg dipilih tersebut..  -->
+
+          <!-- <div id="app">
+            <ol>
+              <li v-for="book in books">
+                {{ book.title }}
+                {{ book.author }}
+                {{ book.description }}
+                {{ book.price }}
+              </li>
+            </ol>
+          </div> -->
+
+<!-- cara utk add to card -->
+<div id="apps">
+  <div class="header">
+    <h2>Add to cart Books</h2>
+    <div>
+      <button @click="showCart = !showCart" v-show="!verified">
+        Your Item:
+        {{ carts.length + (books.length > 1 || books.length === 0 ? " books" : " book") }}
+      </button>
+    </div>
+  </div>
+  <!-- pake reduce utk munculin book quantity -->
+
+  <div class="cart" v-show="showCart">
+    <div v-show="books.length > 0">
+      <ul>
+        <li v-for="book in carts" transition="fade">
+          <p><strong>{{ book.quantity }}</strong> - {{ book.title }} <i class="fa fa-trash" @click="removeFromCart(book)"></i></p>
+        </li>
+      </ul>
+      <div><button @click="verified = true, showCart = false">Check out</button></div>
+    </div>
+    <div v-show="books.length === 0">
+      <p>Your cart is empty!</p>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="book" v-show="!verified">
+      <h3>New Arrivals</h3>
+      <div class="row">
+        <div class="panel panel-info col-md-4" v-for="book in books">
+          <div class="panel-heading"> {{ book.title }} {{ book.author }} </div>
+          <div class="panel-body">{{ book.description }}</div>
+          <div class="panel-footer">{{ book.price }}</div>
+          <button @click="addToCart(book)">Add to cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="checkout" v-show="verified">
+      <h3>Your Cart</h3>
+      <h5 v-for="book in books"><strong>{{ book.quantity }}</strong> - {{ book.name }}<span>${{ book.price * book.quantity }}</span></h5>
+      <hr />
+      <div class="row">
+        <div class="u-pull-right">
+          <h5>Total: <span>{{ total | currency }}</span></h5>
+          <a href="thankyou.html">Looks Good</a>
+          <!-- ini nanti ke thankyou page -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          <!-- bisa ntar di bawah jg ( pake js )
+          <div class="panel panel-default">
+            <div class="panel-heading">@${status.user.screen_name} ${status.user.name} </div>
+            <div class="panel-body">${status.text}</div>
+            <div class="panel-footer">${status.created_at}</div>
+          </div> -->
+
+        </div>
+      </div>
+
+    <footer>
+     <p>Created by: DKT</p>
+     <p>Copy Rigtht: JEDI BOOK STORE  <a href="google.com">someone@example.com</a> all right reserved 2017</p>
+   </footer>
+
+<script>
+// trus disini implementasi vue.js yg script e..
+// var app = new Vue({
+//   el: '#app',
+//   data: {
+//     message: 'Hello Vue!'
+//   }
+// })
+// var apps = new Vue({
+//   el: '.apps',
+//   data: {
+//     title: 'ini title'
+//   }
+// })
+// var app = new Vue({
+//   el: '#app',
+//   created: function() {
+//     var isiApp = this
+//     axios.get('http://localhost:3000/books')
+//     .then((response) => {
+//       isiApp.books = response.data
+//     })
+//   },
+//   data: {
+//     books: []
+//   }
+// })
+//=================
+// const shop = [
+//   {
+//     name: "One-Punch Man, Vol. 5",
+//     price: 10.02,
+//     quantity: 0
+//   },
+//   {
+//     name: "Batman '66, Vol. 5",
+//     price: 9.98,
+//     quantity: 0
+//   },
+//   {
+//     name: "Dragon Ball Freeza Arc, Vol. 1",
+//     price: 15.98,
+//     quantity: 0
+//   },
+//   {
+//     name: "Uzumaki: Spiral into Horror, Vol. 1",
+//     price: 4.84,
+//     quantity: 0
+//   },
+//   {
+//     name: "Superman: Red Son (New Edition)",
+//     price: 10.93,
+//     quantity: 0
+//   }
+// ];
+
+const vm = new Vue({
+  el: "#apps",
+  created: function() {
+    var isiApp = this
+    axios.get('http://localhost:3000/books')
+    .then((response) => {
+      isiApp.books = response.data
+    })
+  },
+  data: {
+    books: [],
+    //shop: shop,
+    showCart: false,
+    verified: false,
+    carts: []
+  },
+  computed: {
+    total() {
+      var total = 0;
+      for(var i = 0; i < this.books.length; i++) {
+        total += this.books[i].price;
+      }
+      return total;
+    }
+  },
+  methods: {
+    addToCart(book) {
+      if(this.carts.length === 0) {
+        this.carts.push(book);
+        console.log(this.carts);
+      } else {
+        // this.carts.push(book.quantity)
+        book.quantity += 1;
+      }
+      // book.quantity += 1;
+      // this.carts.push(book);
+      // klo datanya blm ada.. maka push
+      // tp klo datanya sudah ada,, tinggal tambah quantity nya..
+    },
+    removeFromCart(book) {
+      book.quantity -= 1;
+      this.carts.splice(this.carts.indexOf(book), 1);
+    }
+  }
+});
+//=================
+
+
+  $('.carousel').carousel({
+    interval: 3000
+  })
+</script>
+
+  </body>
+</html>
