@@ -16,7 +16,7 @@ var app2 = new Vue({
   methods:{
     deleteBook: function(id){
       var self = this
-      axios.delete(`http://localhost:3000/book/${id}`)
+      axios.delete(`http://35.187.230.100:3000/book/${id}`)
       .then(log=>{
         var newData = self.list_data.filter(function(data){
           return data._id != id
@@ -29,7 +29,7 @@ var app2 = new Vue({
     },
     addBook: function(){
       var self = this
-      axios.post('http://localhost:3000/book', {
+      axios.post('http://35.187.230.100:3000/book', {
         isbn: self.isbn,
         title: self.title,
         author: self.author,
@@ -49,7 +49,7 @@ var app2 = new Vue({
     editBook: function(id){
       this.toggleModal()
       var self = this
-      axios.get(`http://localhost:3000/book/${id}`)
+      axios.get(`http://35.187.230.100:3000/book/${id}`)
       .then(row=>{
         // console.log(row.data);
         self.isbn = row.data.isbn,
@@ -71,7 +71,7 @@ var app2 = new Vue({
     updateBook: function(){
       var self = this
       console.log(self.id);
-      axios.put(`http://localhost:3000/book/${self.id}`,{
+      axios.put(`http://35.187.230.100:3000/book/${self.id}`,{
         isbn: self.isbn,
         title: self.title,
         author: self.author,
@@ -108,7 +108,7 @@ var app2 = new Vue({
   },
   created:function(){
     var self = this
-    axios.get('http://localhost:3000/book')
+    axios.get('http://35.187.230.100:3000/book')
     .then(result=>{
       self.list_data = result.data
     })

@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <title>ecommerce-layout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
-  <body>
+  <body >
+<div id='app'>
   <section class="hero gray-box is-small">
   <!-- Hero header: will stick at the top -->
   <div class="hero-head">
@@ -104,10 +106,9 @@
           <!-- end modal 2 -->
           <span class="nav-item">
             <a class="button is-inverted">
-              <span class="icon">
-                <i class="fa fa-github"></i>
-              </span>
-              <span>Cart</span>
+              <button @click="showCart = !showCart" v-show="!verified">
+                {{ items.length + (items.length > 1 || items.length === 0 ? " items" : " item") }}
+              </button>
             </a>
           </span>
         </div>
@@ -125,19 +126,56 @@
         Subtitle
       </h2>
     </div>
+
+    <div class="modal" v-bind:class="{ 'is-active': showCart }">
+      <div class="modal-background">
+
+      </div>
+          <div class="modal-content white">
+            <div class="column">
+              <div class="cart" v-show="showCart">
+                <div v-show="items.length > 0">
+                  <ul>
+                    <li v-for="item in items" transition="fade">
+                      <p><strong>1</strong> - {{ item.title }} <i class="fa fa-trash" @click="removeFromCart(item)"></i></p>
+                    </li>
+                  </ul>
+                  <div><button @click="verified = true, showCart = false">Check out</button></div>
+                </div>
+                <div v-show="items.length === 0">
+                  <p>Your cart is empty!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button @click="showCart = !showCart" v-show="!verified" class="modal-close is-large"></button>
+        </div>
+
+
+        <div class="modal" v-bind:class="{ 'is-active': verified }">
+          <div class="modal-background">
+          </div>
+              <div class="modal-content white">
+                <div class="column">
+                  <div class="checkout" v-show="verified">
+                    <h3>Your Cart</h3>
+                    <h5 v-for="item in items"><strong>{{ item.title }}</strong> - {{ item.author }}<span>${{ item.price }}</span></h5>
+                    <hr />
+                    <div class="row">
+                      <div class="u-pull-right">
+                        <h5>Total: {{total}}<span></span></h5>
+                        <button>Looks Good</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+              <button @click="verified = !verified" v-show="verified" class="modal-close is-large"></button>
+          </div>
+
   </div>
 
   <!-- Hero footer: will stick at the bottom -->
-  <div class="hero-foot">
-      <div class="tabs is-centered">
-        <ul>
-          <li><a class="has-text-white-ter">PRODUCTS</a></li>
-          <li><a class="has-text-white-ter">BRANDS</a></li>
-          <li><a class="has-text-white-ter">FAQS</a></li>
-          <li><a class="has-text-white-ter">CONTACTS</a></li>
-        </ul>
-      </div>
-  </div>
 </section>
 
 <br>
@@ -189,7 +227,7 @@
 </section>
 
 <!-- COROUSEL  -->
-<section class="section container is-fluid hero">
+<!-- <section class="section container is-fluid hero">
   <div id="slider">
     <figure>
       <img src="http://bulma.io/images/placeholders/640x480.png" alt>
@@ -198,7 +236,7 @@
       <img src="http://bulma.io/images/placeholders/640x480.png" alt>
     </figure>
   </div>
-</section>
+</section> -->
 <!-- END COROUSEL -->
 
 <!-- Main content -->
@@ -213,7 +251,7 @@
                   <div class="card-content">
                     <aside class="menu">
                       <!-- collapse -->
-                      <input id="toggle" type="checkbox" checked>
+                      <input id="toggle" type="checkbox">
                       <label for="toggle" class="menu-label">
                       </label>
                         Category
@@ -222,25 +260,6 @@
                           <ul class="menu-list">
                             <li><a class="has-text-black">Shoes</a></li>
                             <li><a class="has-text-black">Men Shoes</a></li>
-                          </ul>
-                        </section>
-                      </div>
-                      <!-- end collapse -->
-                      <hr>
-                      <!-- collapse -->
-                      <input id="toggle" type="checkbox" checked>
-                      <label for="toggle" class="menu-label">
-                      </label>
-                        Type
-                      <div id="expand">
-                        <section>
-                          <ul class="menu-list">
-                            <li><a class="has-text-black">Running Shoes</a></li>
-                            <li><a class="has-text-black">Football Shoes</a></li>
-                            <li><a class="has-text-black">Running Shoes</a></li>
-                            <li><a class="has-text-black">Football Shoes</a></li>
-                            <li><a class="has-text-black">Running Shoes</a></li>
-                            <li><a class="has-text-black">Football Shoes</a></li>
                           </ul>
                         </section>
                       </div>
@@ -255,7 +274,7 @@
         </div>
         <div class="tile is-parent is-9">
           <article class="tile is-child">
-            <div class="columns item-custom" id='app'>
+            <div class="columns item-custom">
               <div class="column is-4" v-for="data in list_item">
                 <div class="card">
                   <div class="card-content">
@@ -279,7 +298,7 @@
                       <small>Isbn: {{data.isbn}}</small>
                       <small v-if="data.stock > 0">Stock: {{data.stock}}</small>
                       <small v-else>Sold Out!</small>
-                      <button type="button" name="button" v-on:click="addToChart(data._id)">Add To Chart</button>
+                      <button type="button" name="button" @click="addToCart(data)">Add To Chart</button>
                     </div>
                   </div>
                 </div>
@@ -310,6 +329,7 @@
 </footer>
 <!-- END FOOTER -->
 </section>
+</div>
   </body>
 
   <!-- vue js setting -->
@@ -319,6 +339,19 @@
       data:{
         message: 'hello vue',
         list_item: [],
+        items: [],
+        showCart: false,
+        verified: false,
+        status: false
+      },
+      computed: {
+        total() {
+          var total = 0;
+          for(var i = 0; i < this.items.length; i++) {
+            total += this.items[i].price;
+          }
+          return total;
+        }
       },
       methods:{
         addToChart: function(id){
@@ -331,12 +364,20 @@
           .catch(err=>{
             console.log(err);
           })
+        },
+        addToCart(item) {
+          item.quantity += 1;
+          this.items.push(item);
+        },
+        removeFromCart(item) {
+          item.quantity -= 1;
+          this.items.splice(this.items.indexOf(item), 1);
         }
       },
       created: function(){
         console.log('asd');
         var self = this
-        axios.get('http://localhost:3000/book')
+        axios.get('http://35.187.230.100:3000/book')
         .then(function(rows){
           for (var i = 0; i < rows.data.length; i++) {
             self.list_item.push(rows.data[i])
