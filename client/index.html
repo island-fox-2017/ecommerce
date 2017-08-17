@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Template e-commerce</title>
+
+    <style media="screen">
+      * {
+        background: grey;
+        border: black solid 1px;
+      }
+      body {
+        padding: 10px;
+      }
+      .card-content {
+        padding: 0.5rem;
+      }
+      #content {
+        margin: 10px;
+      }
+    </style>
+
+  </head>
+  <body>
+  <div id="app">
+
+    <!-- bagian atas navbar -->
+    <!-- <section class="section"> -->
+      <div class="columns">
+        <div class="column is-one-quarter">
+          <a href="#">
+            <span class="icon is-large">
+              <i class="fa fa-home" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+        <div class="column is-centered">
+          blok judul tengah
+        </div>
+        <div class="column is-one-quarter">
+          <button>
+            {{ cart.length + (cart.length > 1 || cart.length === 0 ? " items" : " item") }}
+          </button>
+        </div>
+      </div>
+    <!-- </section> -->
+
+
+    <!-- bagian logo dan search-bar -->
+    <div class="columns">
+      <div class="column is-one-quarter">
+        Logo
+      </div>
+      <div class="column">
+        <div class="field has-addons">
+          <p class="control is-expanded">
+            <input class="input" type="text" placeholder="Search">
+          </p>
+          <p class="control">
+            <a class="button is-info">
+              <span class="icon is-small is-left">
+                <i class="fa fa-search"></i>
+              </span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="columns">
+
+        <!-- navigasi kiri -->
+        <div class="column is-one-quarter">
+
+          <aside class="menu">
+              <p class="panel-heading">
+                Best Seller
+              </p>
+              <a class="panel-block is-active" href="#">
+                <span class="panel-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                Buku 1
+              </a>
+              <a class="panel-block" href="#">
+                <span class="panel-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                Buku 2
+              </a>
+          </aside>
+          <br><br>
+
+          <aside class="menu">
+              <p class="panel-heading">
+                Favourite
+              </p>
+              <a class="panel-block is-active" href="#">
+                <span class="panel-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                Buku 1
+              </a>
+              <a class="panel-block" href="#">
+                <span class="panel-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                Buku 2
+              </a>
+          </aside>
+          <br><br>
+
+          <aside class="menu">
+              <p class="panel-heading">
+                Favourite Author
+              </p>
+              <a class="panel-block is-active" v-for="a in authorList" href="#">
+                <span class="panel-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                {{a}}
+              </a>
+
+          </aside>
+
+        </div> <!-- navigasi kiri -->
+
+        <!-- konten kanan -->
+        <div class="column">
+          <div class="columns" style="flex-wrap:wrap;">
+            <div class="column is-one-quarter" v-for="book in booksData">
+              <div class="card" style="height:100%;">
+                <div class="card-image">
+                  <figure class="image is-3by4">
+                    <img v-bind:src="book.image" alt="Image">
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4">{{book.title}}</p>
+                      {{book.price}}
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    {{book.synopsis}}
+                    <br>
+                    <button @click="addToCart(book)">Add to cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- konten kanan -->
+
+      </div>
+
+  </div>
+
+
+    </section>
+
+
+
+
+
+
+  </div> <!-- tutup id:app body -->
+
+  <!-- script vue -->
+  <script src="assets/js/script.js"></script>
+
+
+  </body>
+
+</html>
