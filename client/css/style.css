@@ -1,0 +1,51 @@
+.metamorphega-content{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.mc-image{
+  margin-bottom: 20px;
+}
+
+.metamorphega{
+  background-color: white;
+}
+
+.metamorphega-cart{
+  padding-left: 10px;
+  border-left: 1px solid #969696;
+}
+
+.navbar-brand img{
+    width: 40px;
+    height: 30px;
+}
+
+.vega {
+  padding-top: 50px;
+}
+
+.metamorphega-form-btn{
+  margin-right: 7px;
+}
+
+.metamorphega-btn-cart{
+  background-color: #3498db;
+  border-radius: 3px;
+  color: white;
+}
+
+.metamorphega-slider{
+  background: #E4E4E4;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  margin-top: -20px;
+}
+
+.footer{
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: #969696;
+  color: white;
+  font-size: 17px;
+}
